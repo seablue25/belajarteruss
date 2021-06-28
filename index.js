@@ -1,11 +1,12 @@
-let http = require('http');
-let fs = require('fs');
+const express = require('express');
+const app = express();
 
-let handleRequest = (request, response) => {
+
+app.handleRequest = (request, response) => {
     response.writeHead(200, {
         'Content-Type': 'text/html'
     });
-    fs.readFile('./index.html', null, function (error, data) {
+    app.readFile('./index.html', null, function (error, data) {
         if (error) {
             response.writeHead(404);
             respone.write('Whoops! File not found!');
@@ -16,4 +17,4 @@ let handleRequest = (request, response) => {
     });
 };
 
-http.createServer(handleRequest).listen(8000);
+app.listen(process.env.PORT || 8080);
